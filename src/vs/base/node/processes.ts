@@ -366,14 +366,14 @@ export class LineProcess extends AbstractProcess<LineData> {
 	protected handleSpawn(childProcess: ChildProcess, cc: TValueCallback<SuccessData>, pp: TProgressCallback<LineData>, ee: ErrorCallback, sync: boolean): void {
 		this.stdoutLineDecoder = new LineDecoder();
 		this.stderrLineDecoder = new LineDecoder();
-		childProcess.stdout.on('data', (data:Buffer) => {
-			let lines = this.stdoutLineDecoder.write(data);
-			lines.forEach(line => pp({ line: line, source: Source.stdout }));
-		});
-		childProcess.stderr.on('data', (data:Buffer) => {
-			let lines = this.stderrLineDecoder.write(data);
-			lines.forEach(line => pp({ line: line, source: Source.stderr }));
-		});
+		// childProcess.stdout.on('data', (data:Buffer) => {
+		// 	let lines = this.stdoutLineDecoder.write(data);
+		// 	lines.forEach(line => pp({ line: line, source: Source.stdout }));
+		// });
+		// childProcess.stderr.on('data', (data:Buffer) => {
+		// 	let lines = this.stderrLineDecoder.write(data);
+		// 	lines.forEach(line => pp({ line: line, source: Source.stderr }));
+		// });
 	}
 
 	protected handleClose(data: any, cc: TValueCallback<SuccessData>, pp: TProgressCallback<LineData>, ee: ErrorCallback): void {
@@ -401,12 +401,12 @@ export class BufferProcess extends AbstractProcess<BufferData> {
 	}
 
 	protected handleSpawn(childProcess: ChildProcess, cc: TValueCallback<SuccessData>, pp: TProgressCallback<BufferData>, ee: ErrorCallback, sync: boolean): void {
-		childProcess.stdout.on('data', (data:Buffer) => {
-			pp({ data: data, source: Source.stdout });
-		});
-		childProcess.stderr.on('data', (data:Buffer) => {
-			pp({ data: data, source: Source.stderr });
-		});
+		// childProcess.stdout.on('data', (data:Buffer) => {
+		// 	pp({ data: data, source: Source.stdout });
+		// });
+		// childProcess.stderr.on('data', (data:Buffer) => {
+		// 	pp({ data: data, source: Source.stderr });
+		// });
 	}
 }
 
@@ -420,21 +420,21 @@ export class StreamProcess extends AbstractProcess<StreamData> {
 	}
 
 	protected handleExec(cc: TValueCallback<SuccessData>, pp: TProgressCallback<StreamData>, error: Error, stdout: Buffer, stderr: Buffer): void {
-		let stdoutStream = new PassThrough();
-		stdoutStream.end(stdout);
-		let stderrStream = new PassThrough();
-		stderrStream.end(stderr);
-		pp({ stdin: null, stdout: stdoutStream, stderr: stderrStream });
-		cc({ terminated: this.terminateRequested, error: error });
+		// let stdoutStream = new PassThrough();
+		// stdoutStream.end(stdout);
+		// let stderrStream = new PassThrough();
+		// stderrStream.end(stderr);
+		// pp({ stdin: null, stdout: stdoutStream, stderr: stderrStream });
+		// cc({ terminated: this.terminateRequested, error: error });
 	}
 
 	protected handleSpawn(childProcess: ChildProcess, cc: TValueCallback<SuccessData>, pp: TProgressCallback<StreamData>, ee: ErrorCallback, sync: boolean): void {
-		if (sync) {
-			process.nextTick(() => {
-				pp({ stdin: childProcess.stdin, stdout: childProcess.stdout, stderr: childProcess.stderr });
-			});
-		} else {
-			pp({ stdin: childProcess.stdin, stdout: childProcess.stdout, stderr: childProcess.stderr });
-		}
+		// if (sync) {
+		// 	process.nextTick(() => {
+		// 		pp({ stdin: childProcess.stdin, stdout: childProcess.stdout, stderr: childProcess.stderr });
+		// 	});
+		// } else {
+		// 	pp({ stdin: childProcess.stdin, stdout: childProcess.stdout, stderr: childProcess.stderr });
+		// }
 	}
 }

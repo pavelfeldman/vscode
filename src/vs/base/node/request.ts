@@ -101,7 +101,7 @@ export function json<T>(opts: IRequestOptions): TPromise<T> {
 		}
 
 		let buffer: string[] = [];
-		pair.res.on('data', d => buffer.push(d));
+		//pair.res.on('data', d => buffer.push(d));
 		pair.res.on('end', () => c(JSON.parse(buffer.join(''))));
 		pair.res.on('error', e);
 	}));

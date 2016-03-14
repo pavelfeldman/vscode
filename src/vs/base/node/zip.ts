@@ -99,7 +99,7 @@ export function buffer(zipPath: string, filePath: string): TPromise<Buffer> {
 		return new TPromise<Buffer>((c, e) => {
 			const buffers = [];
 			stream.once('error', e);
-			stream.on('data', b => buffers.push(b));
+			// stream.on('data', b => buffers.push(b));
 			stream.on('end', () => c(Buffer.concat(buffers)));
 		});
 	});

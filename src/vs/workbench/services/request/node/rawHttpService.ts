@@ -40,7 +40,7 @@ export function xhr(options: IXHROptions): TPromise<IXHRResponse> {
 		}
 
 		const data: string[] = [];
-		stream.on('data', c => data.push(c));
+		// stream.on('data', c => data.push(c));
 		stream.on('end', () => {
 			const status = res.statusCode;
 

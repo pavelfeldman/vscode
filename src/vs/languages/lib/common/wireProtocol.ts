@@ -127,19 +127,19 @@ export class Reader<T> {
 	private nextMessageLength:number;
 
 	public constructor(readable:stream.Readable, callback:ICallback<T>, type:ReaderType = ReaderType.Length) {
-		this.readable = readable;
-		this.buffer = new ProtocolBuffer();
-		this.callback = callback;
-		this.nextMessageLength = -1;
-		if (type === ReaderType.Length) {
-			this.readable.on('data', (data:Buffer) => {
-				this.onLengthData(data);
-			});
-		} else if (type === ReaderType.Line) {
-			this.readable.on('data', (data:Buffer) => {
-				this.onLineData(data);
-			});
-		}
+		// this.readable = readable;
+		// this.buffer = new ProtocolBuffer();
+		// this.callback = callback;
+		// this.nextMessageLength = -1;
+		// if (type === ReaderType.Length) {
+		// 	this.readable.on('data', (data:Buffer) => {
+		// 		this.onLengthData(data);
+		// 	});
+		// } else if (type === ReaderType.Line) {
+		// 	this.readable.on('data', (data:Buffer) => {
+		// 		this.onLineData(data);
+		// 	});
+		// }
 	}
 
 	private onLengthData(data:Buffer):void {
@@ -182,15 +182,15 @@ export class Writer<T> {
 	}
 
 	public write(msg:T):void {
-		var json = JSON.stringify(msg);
+		// var json = JSON.stringify(msg);
 
-		var buffer:string[] = [
-			ContentLength,
-			Buffer.byteLength(json, 'utf8').toString(),
-			'\r\n\r\n',
-			json,
-			'\r\n'
-		];
-		this.writable.write(buffer.join(''), 'utf8');
+		// var buffer:string[] = [
+		// 	ContentLength,
+		// 	Buffer.byteLength(json, 'utf8').toString(),
+		// 	'\r\n\r\n',
+		// 	json,
+		// 	'\r\n'
+		// ];
+		// this.writable.write(buffer.join(''), 'utf8');
 	}
 }

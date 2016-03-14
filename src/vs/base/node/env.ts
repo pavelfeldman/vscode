@@ -28,7 +28,7 @@ export function getUserEnvironment(): TPromise<IEnv> {
 		child.on('error', () => c({}));
 
 		let buffer = '';
-		child.stdout.on('data', (d: string) => { buffer += d; });
+		// child.stdout.on('data', (d: string) => { buffer += d; });
 
 		child.on('close', (code: number, signal: any) => {
 			if (code !== 0) {

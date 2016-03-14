@@ -16,15 +16,15 @@ export function readExactlyByStream(stream:stream.Readable, totalBytes:number, c
 	let buffer = new Buffer(totalBytes);
 	let bytesRead = 0;
 
-	stream.on('data', (data:NodeBuffer) => {
-		let bytesToRead = Math.min(totalBytes - bytesRead, data.length);
-		data.copy(buffer, bytesRead, 0, bytesToRead);
-		bytesRead += bytesToRead;
+	// stream.on('data', (data:NodeBuffer) => {
+	// 	let bytesToRead = Math.min(totalBytes - bytesRead, data.length);
+	// 	data.copy(buffer, bytesRead, 0, bytesToRead);
+	// 	bytesRead += bytesToRead;
 
-		if (bytesRead === totalBytes) {
-			stream.destroy(); // Will trigger the close event eventually
-		}
-	});
+	// 	if (bytesRead === totalBytes) {
+	// 		stream.destroy(); // Will trigger the close event eventually
+	// 	}
+	// });
 
 	stream.on('error', (e:Error) => {
 		if (!done) {

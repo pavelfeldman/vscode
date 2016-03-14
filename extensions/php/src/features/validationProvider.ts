@@ -203,9 +203,9 @@ export default class PHPValidationProvider {
 						childProcess.stdin.write(textDocument.getText());
 						childProcess.stdin.end();
 					}
-					childProcess.stdout.on('data', (data: Buffer) => {
-						decoder.write(data).forEach(processLine);
-					});
+					// childProcess.stdout.on('data', (data: Buffer) => {
+					// 	decoder.write(data).forEach(processLine);
+					// });
 					childProcess.stdout.on('end', () => {
 						let line = decoder.end();
 						if (line) {

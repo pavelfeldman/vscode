@@ -56,31 +56,31 @@ export function xhr(options: IXHROptions): Promise<IXHRResponse> {
 	return request(options).then(result => new Promise<IXHRResponse>((c, e) => {
 		let res = result.res;
 		let data: string[] = [];
-		res.on('data', c => data.push(c));
-		res.on('end', () => {
-			if (options.followRedirects > 0 && (res.statusCode >= 300 && res.statusCode <= 303 || res.statusCode === 307)) {
-				let location = res.headers['location'];
-				if (location) {
-					let newOptions = {
-						type: options.type, url: location, user: options.user, password: options.password, responseType: options.responseType, headers: options.headers,
-						timeout: options.timeout, followRedirects: options.followRedirects - 1, data: options.data
-					};
-					xhr(newOptions).then(c, e);
-					return;
-				}
-			}
+		// res.on('data', c => data.push(c));
+		// res.on('end', () => {
+		// 	if (options.followRedirects > 0 && (res.statusCode >= 300 && res.statusCode <= 303 || res.statusCode === 307)) {
+		// 		let location = res.headers['location'];
+		// 		if (location) {
+		// 			let newOptions = {
+		// 				type: options.type, url: location, user: options.user, password: options.password, responseType: options.responseType, headers: options.headers,
+		// 				timeout: options.timeout, followRedirects: options.followRedirects - 1, data: options.data
+		// 			};
+		// 			xhr(newOptions).then(c, e);
+		// 			return;
+		// 		}
+		// 	}
 
-			let response: IXHRResponse = {
-				responseText: data.join(''),
-				status: res.statusCode
-			};
+		// 	let response: IXHRResponse = {
+		// 		responseText: data.join(''),
+		// 		status: res.statusCode
+		// 	};
 
-			if ((res.statusCode >= 200 && res.statusCode < 300) || res.statusCode === 1223) {
-				c(response);
-			} else {
-				e(response);
-			}
-		});
+		// 	if ((res.statusCode >= 200 && res.statusCode < 300) || res.statusCode === 1223) {
+		// 		c(response);
+		// 	} else {
+		// 		e(response);
+		// 	}
+		// });
 	}), err => {
 		let message: string;
 

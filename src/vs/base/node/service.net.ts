@@ -34,33 +34,33 @@ class Protocol implements IMessagePassingProtocol {
 	}
 
 	public onMessage(callback: (message: any) => void): void {
-		this.socket.on('data', (data: Buffer) => {
-			let lastIndex = 0;
-			let index = 0;
+		// this.socket.on('data', (data: Buffer) => {
+		// 	let lastIndex = 0;
+		// 	let index = 0;
 
-			while ((index = bufferIndexOf(data, 0, lastIndex)) < data.length) {
-				const dataToParse = data.slice(lastIndex, index);
+		// 	while ((index = bufferIndexOf(data, 0, lastIndex)) < data.length) {
+		// 		const dataToParse = data.slice(lastIndex, index);
 
-				if (this.buffer) {
-					callback(JSON.parse(Buffer.concat([this.buffer, dataToParse]).toString('utf8')));
-					this.buffer = null;
-				} else {
-					callback(JSON.parse(dataToParse.toString('utf8')));
-				}
+		// 		if (this.buffer) {
+		// 			callback(JSON.parse(Buffer.concat([this.buffer, dataToParse]).toString('utf8')));
+		// 			this.buffer = null;
+		// 		} else {
+		// 			callback(JSON.parse(dataToParse.toString('utf8')));
+		// 		}
 
-				lastIndex = index + 1;
-			}
+		// 		lastIndex = index + 1;
+		// 	}
 
-			if (index - lastIndex > 0) {
-				const dataToBuffer = data.slice(lastIndex, index);
+		// 	if (index - lastIndex > 0) {
+		// 		const dataToBuffer = data.slice(lastIndex, index);
 
-				if (this.buffer) {
-					this.buffer = Buffer.concat([this.buffer, dataToBuffer]);
-				} else {
-					this.buffer = dataToBuffer;
-				}
-			}
-		});
+		// 		if (this.buffer) {
+		// 			this.buffer = Buffer.concat([this.buffer, dataToBuffer]);
+		// 		} else {
+		// 			this.buffer = dataToBuffer;
+		// 		}
+		// 	}
+		// });
 	}
 }
 

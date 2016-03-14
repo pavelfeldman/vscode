@@ -221,9 +221,9 @@ export class RawDebugSession extends v8.V8Protocol implements debug.IRawDebugSes
 			// this.serverProcess.stdout.on('data', (data: string) => {
 			// 	console.log('%c' + sanitize(data), 'background: #ddd; font-style: italic;');
 			// });
-			this.serverProcess.stderr.on('data', (data: string) => {
-				console.log(sanitize(data));
-			});
+			// this.serverProcess.stderr.on('data', (data: string) => {
+			// 	console.log(sanitize(data));
+			// });
 
 			this.connect(this.serverProcess.stdout, this.serverProcess.stdin);
 		}));

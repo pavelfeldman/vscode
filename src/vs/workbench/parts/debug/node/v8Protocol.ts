@@ -64,10 +64,10 @@ export abstract class V8Protocol extends ee.EventEmitter {
 
 		this.outputStream = writable;
 
-		readable.on('data', (data: Buffer) => {
-			this.rawData = Buffer.concat([this.rawData, data]);
-			this.handleData();
-		});
+		// readable.on('data', (data: Buffer) => {
+		// 	this.rawData = Buffer.concat([this.rawData, data]);
+		// 	this.handleData();
+		// });
 	}
 
 	protected send(command: string, args: any): TPromise<DebugProtocol.Response> {
