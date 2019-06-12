@@ -57,4 +57,4 @@ These extensions include grammars and snippets for several languages. Extensions
 
 Copyright (c) Microsoft Corporation. All rights reserved.
 
-Licensed under the [MIT](LICENSE.txt) License.
+Licensed under the [MIT](LICENSE.txt) License
